@@ -1,15 +1,18 @@
-import {applyMiddleware, createStore} from 'redux';
 import {reducer} from '../reducer';
-import {AsyncStorage} from '~libraries';
-import {persistReducer, persistStore} from 'redux-persist';
+import {
+  AsyncStorage,
+  configureStore,
+  persistReducer,
+  persistStore,
+} from '~libraries';
 
 const persistConfig = {
   key: 'root',
   storage: AsyncStorage,
+  whitelist: ['app'],
 };
 
-const middleware = applyMiddleware(thunk, logger);
 const persistedReducer = persistReducer(persistConfig, reducer);
 
-export const store = createStore(persistedReducer, middleware);
+export const store = configureStore({reducer: persistedReducer});
 export const persistor = persistStore(store);

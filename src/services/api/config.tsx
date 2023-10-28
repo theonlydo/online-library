@@ -1,5 +1,5 @@
-import {AuthState, store} from '~redux';
-import {DeviceInfo, CryptoJS, Config} from '~libraries';
+import {AppState, store} from '~redux';
+import {DeviceInfo} from '~libraries';
 import axios from 'axios';
 import _ from 'lodash';
 import {Platform} from 'react-native';
@@ -70,15 +70,8 @@ class ApiRequest {
    */
   static async request(method: string, route: string, payload: Payload) {
     // REDUX STATE
-    const appState = store.getState(); // set store state
-    const auth: AuthState = appState.auth;
-
-    // Decrypt
-    let accessToken = '';
-    if (auth.accessToken !== '') {
-      const bytes = CryptoJS.AES.decrypt(auth, Config.APP_KEY);
-      accessToken = bytes.toString(CryptoJS.enc.Utf8) || '';
-    }
+    const reduxStore = store.getState(); // set store sta
+    const app: AppState = reduxStore.app;
 
     if (payload.params) {
       const path = this.resolveParams(payload.params);
@@ -90,7 +83,7 @@ class ApiRequest {
       Version: DeviceInfo.getBuildNumber(),
       Platform: Platform.OS,
       Timestamp: `${Date.now()}`,
-      Authorization: `Bearer ${accessToken}`,
+      Authorization: `Bearer ${app.accessToken}`,
     };
 
     const requestConfig: RequestConfig = {

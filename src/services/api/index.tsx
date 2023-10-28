@@ -1,13 +1,8 @@
 import ApiRequest from './config';
-import {Config} from '~libraries';
+import {API_ENDPOINT, API_GET_BOOK_GENRE} from '@env';
 
 const API = {
-  /**
-   * ====================================================
-   * AUTH
-   * ====================================================
-   */
-  reqLogin: ApiRequest.post(Config.API_ENDPOINT + Config.API_LOGIN),
+  reqGetBookByGenre: ApiRequest.get(API_ENDPOINT + API_GET_BOOK_GENRE),
 };
 
 export default API;
