@@ -1,32 +1,38 @@
-import React, {useEffect} from 'react';
-import {ScrollView} from 'react-native';
+import React, {useEffect, useState} from 'react';
+import {RefreshControl, ScrollView} from 'react-native';
 import {useDispatch} from '~libraries';
-import {GroupList, getAllBooks} from '~redux';
+import {BookState, getAllBooks} from '~redux';
 import styles from './styles';
 import HorizontalBookList from '~components/organisms/horizontalBookList';
 import {useSelector} from 'react-redux';
 
 const DashboardScreen = () => {
   const dispatch: any = useDispatch();
-  const books: any = useSelector((state: any) => state.books);
+  const [refreshing] = useState(false);
+  const books: BookState = useSelector((state: any) => state.books);
 
   useEffect(() => {
-    inititalData();
+    getData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const inititalData = () => {
+  const getData = () => {
     dispatch(getAllBooks());
   };
 
-  const _renderBookList = () => {
-    if (books?.groupList) {
-      return books.groupList.map((item: GroupList) => {
-        return <HorizontalBookList genre={item.genre} list={item?.list} />;
-      });
-    }
-  };
-
-  return <ScrollView style={styles.container}>{_renderBookList()}</ScrollView>;
+  return (
+    <ScrollView
+      style={styles.container}
+      showsVerticalScrollIndicator={false}
+      refreshControl={
+        <RefreshControl refreshing={refreshing} onRefresh={getData} />
+      }>
+      <HorizontalBookList
+        dataList={books.groupList}
+        isLoading={books.isLoading}
+      />
+    </ScrollView>
+  );
 };
 
 export default DashboardScreen;

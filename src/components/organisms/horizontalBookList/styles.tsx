@@ -12,7 +12,7 @@ const styles = StyleSheet.create({
     paddingBottom: appMetrics.gutter.xs,
   },
   genre: {
-    color: colors.primary,
+    color: colors.black,
     fontWeight: 'bold',
     fontSize: 20,
   },

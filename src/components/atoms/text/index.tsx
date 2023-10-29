@@ -10,6 +10,7 @@ interface TextProps {
   tx?: string;
   txOptions?: object;
   style?: TextStyle | TextStyle[];
+  numberOfLines?: number;
 }
 
 const Text = (props: TextProps) => {

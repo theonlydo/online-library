@@ -15,7 +15,9 @@ const BookCard = (props: Props) => {
   return (
     <View style={styles.container}>
       <Image style={styles.book} source={{uri: cover}} />
-      <Text style={styles.title}>{title}</Text>
+      <Text style={styles.title} numberOfLines={1}>
+        {title}
+      </Text>
       <Text>
         by <Text style={styles.name}>{author || '-'}</Text>
       </Text>

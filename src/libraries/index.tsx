@@ -12,6 +12,8 @@ import DeviceInfo from 'react-native-device-info';
 import {configureStore} from '@reduxjs/toolkit';
 import {createAction, createReducer} from '@reduxjs/toolkit';
 import {persistReducer, persistStore} from 'redux-persist';
+import SkeletonContent from 'react-native-skeleton-content-nonexpo';
+import SkeletonPlaceholder from 'react-native-skeleton-placeholder';
 
 export {
   CryptoJS,
@@ -23,8 +25,10 @@ export {
   createReducer,
   useDispatch,
   CommonActions,
+  SkeletonContent,
   persistReducer,
   configureStore,
+  SkeletonPlaceholder,
   NavigationContainer,
   createNativeStackNavigator,
   createNavigationContainerRef,
