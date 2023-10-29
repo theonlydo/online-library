@@ -1,6 +1,8 @@
 const actionTypes = {
   SET_BOOK_LIST: 'SET_BOOK_LIST',
+  SET_BOOK_GROUP_LIST: 'SET_BOOK_GROUP_LIST',
   SET_SELECTED_BOOK: 'SET_SELECTED_BOOK',
+  SET_BOOK_LOADING: 'SET_BOOK_LOADING',
 };
 
 export default actionTypes;

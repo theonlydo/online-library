@@ -8,6 +8,16 @@ const Auth = (state: BookState = initialBookState, action: any) => {
         ...state,
         list: action.value,
       };
+    case actionTypes.SET_BOOK_GROUP_LIST:
+      return {
+        ...state,
+        groupList: action.value,
+      };
+    case actionTypes.SET_BOOK_LOADING:
+      return {
+        ...state,
+        isLoading: action.value,
+      };
     default:
       return state;
   }

@@ -5,10 +5,10 @@ import _ from 'lodash';
 import {Platform} from 'react-native';
 
 interface Payload {
-  headers?: any;
-  params?: any;
+  headers?: object;
+  params?: object;
+  path?: string;
   body?: any;
-  public?: boolean;
 }
 
 interface RequestConfig {
@@ -73,6 +73,10 @@ class ApiRequest {
     const reduxStore = store.getState(); // set store sta
     const app: AppState = reduxStore.app;
 
+    if (payload.path) {
+      route = route + payload.path;
+    }
+
     if (payload.params) {
       const path = this.resolveParams(payload.params);
       route = route + path;
@@ -107,7 +111,7 @@ class ApiRequest {
       await this.resolveResponse(res.data);
       return Promise.resolve(res.data);
     } catch (err) {
-      console.log(err);
+      console.log('ERR_', err);
       this.resolveResponse(err);
       return Promise.reject(err);
     }
