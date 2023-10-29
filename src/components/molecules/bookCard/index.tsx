@@ -1,7 +1,7 @@
 import React, {memo} from 'react';
 import {Image, View} from 'react-native';
 import styles from './styles';
-import Text from '~components/atoms/text';
+import {Text} from '~components';
 
 interface Props {
   title: string;
@@ -18,7 +18,7 @@ const BookCard = (props: Props) => {
       <Text style={styles.title} numberOfLines={1}>
         {title}
       </Text>
-      <Text>
+      <Text numberOfLines={1}>
         by <Text style={styles.name}>{author || '-'}</Text>
       </Text>
     </View>

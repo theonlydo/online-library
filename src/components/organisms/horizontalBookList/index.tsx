@@ -1,11 +1,10 @@
 import React from 'react';
 import {FlatList, View} from 'react-native';
-import Text from '~components/atoms/text';
 import styles from './styles';
-import BookCard from '~components/molecules/bookCard';
 import {appMetrics} from '~theme';
 import {GroupList} from '~redux';
 import {SkeletonPlaceholder} from '~libraries';
+import {BookCard, Text} from '~components';
 interface Props {
   dataList: Array<GroupList>;
   isLoading?: boolean;

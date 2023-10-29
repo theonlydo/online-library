@@ -1,3 +1,3 @@
 import BookCard from './bookCard';
 
-export default {BookCard};
+export {BookCard};

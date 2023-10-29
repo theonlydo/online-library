@@ -1,1 +1,3 @@
-export * from './horizontalBookList';
+import HorizontalBookList from './horizontalBookList';
+
+export {HorizontalBookList};

@@ -3,8 +3,8 @@ import {RefreshControl, ScrollView} from 'react-native';
 import {useDispatch} from '~libraries';
 import {BookState, getAllBooks} from '~redux';
 import styles from './styles';
-import HorizontalBookList from '~components/organisms/horizontalBookList';
 import {useSelector} from 'react-redux';
+import {HorizontalBookList} from '~components';
 
 const DashboardScreen = () => {
   const dispatch: any = useDispatch();
