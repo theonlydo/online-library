@@ -18,7 +18,6 @@ const styles = StyleSheet.create({
     margin: 2,
   },
   containerVertical: {
-    flex: 1,
     flexDirection: 'row',
     marginTop: appMetrics.gutter.m,
   },
@@ -34,7 +33,7 @@ const styles = StyleSheet.create({
   },
   titleHorizontal: {
     fontWeight: 'bold',
-    fontSize: 16,
+    fontSize: 18,
   },
   name: {
     fontWeight: 'bold',
@@ -47,6 +46,7 @@ const styles = StyleSheet.create({
   },
   rightContainer: {
     marginLeft: appMetrics.gutter.m,
+    flex: -1,
   },
 });
 

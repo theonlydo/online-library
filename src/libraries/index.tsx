@@ -15,6 +15,7 @@ import {createAction, createReducer} from '@reduxjs/toolkit';
 import {persistReducer, persistStore} from 'redux-persist';
 import SkeletonContent from 'react-native-skeleton-content-nonexpo';
 import SkeletonPlaceholder from 'react-native-skeleton-placeholder';
+import DateTimePicker from '@react-native-community/datetimepicker';
 
 export {
   CryptoJS,
@@ -30,6 +31,7 @@ export {
   SkeletonContent,
   persistReducer,
   configureStore,
+  DateTimePicker,
   SkeletonPlaceholder,
   NavigationContainer,
   createNativeStackNavigator,

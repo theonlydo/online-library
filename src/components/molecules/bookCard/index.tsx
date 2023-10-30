@@ -1,44 +1,52 @@
 import React, {memo} from 'react';
-import {Image, View} from 'react-native';
+import {Image, Pressable, View} from 'react-native';
 import styles from './styles';
 import {Text} from '~components';
+import {ItemBook} from '~redux';
 
 interface Props {
-  title: string;
-  author: string;
-  cover?: string;
-  year?: string;
   isHorizontal?: boolean;
+  onPressBook?: any;
+  bookData: ItemBook;
 }
 
 const BookCard = (props: Props) => {
-  const {title, author, cover, isHorizontal, year} = props;
+  const {isHorizontal, onPressBook, bookData} = props;
 
   if (isHorizontal) {
     return (
-      <View style={styles.containerVertical}>
-        <Image style={styles.book} source={{uri: cover}} />
+      <Pressable
+        style={styles.containerVertical}
+        onPress={() => {
+          onPressBook(bookData);
+        }}>
+        <Image style={styles.book} source={{uri: bookData?.cover}} />
         <View style={styles.rightContainer}>
-          <Text style={styles.title}>{title}</Text>
+          <Text style={styles.titleHorizontal}>{bookData?.title}</Text>
           <Text>
-            by <Text style={styles.name}>{author || '-'}</Text>
+            by{' '}
+            <Text style={styles.name}>{bookData?.author[0]?.name || '-'}</Text>
           </Text>
-          <Text>year: {year}</Text>
+          <Text>year: {bookData?.year}</Text>
         </View>
-      </View>
+      </Pressable>
     );
   }
 
   return (
-    <View style={styles.container}>
-      <Image style={styles.book} source={{uri: cover}} />
+    <Pressable
+      style={styles.container}
+      onPress={() => {
+        onPressBook(bookData);
+      }}>
+      <Image style={styles.book} source={{uri: bookData?.cover}} />
       <Text style={styles.title} numberOfLines={1}>
-        {title}
+        {bookData?.title}
       </Text>
       <Text numberOfLines={1}>
-        by <Text style={styles.name}>{author || '-'}</Text>
+        by <Text style={styles.name}>{bookData.author[0]?.name || '-'}</Text>
       </Text>
-    </View>
+    </Pressable>
   );
 };
 

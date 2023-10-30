@@ -1,7 +1,14 @@
 import React, {useEffect, useState} from 'react';
 import {RefreshControl, ScrollView} from 'react-native';
 import {useDispatch, useNavigation} from '~libraries';
-import {BookState, GroupList, getAllBooks, setBookList} from '~redux';
+import {
+  BookState,
+  GroupList,
+  ItemBook,
+  getAllBooks,
+  setBookList,
+  setSelectedBook,
+} from '~redux';
 import styles from './styles';
 import {useSelector} from 'react-redux';
 import {HorizontalBookList} from '~components';
@@ -27,6 +34,13 @@ const DashboardScreen = () => {
     });
   };
 
+  const onPressBook = (item: ItemBook) => {
+    dispatch(setSelectedBook(item));
+    navigation.navigate(NAVIGATIONS.BORROW_BOOK, {
+      pageTitle: `Borrow: ${item.title}`,
+    });
+  };
+
   const getData = () => {
     dispatch(getAllBooks());
   };
@@ -42,6 +56,7 @@ const DashboardScreen = () => {
         dataList={books.groupList}
         isLoading={books.isLoading}
         handleNavigateToDetail={navigateToList}
+        onPressBook={onPressBook}
       />
     </ScrollView>
   );

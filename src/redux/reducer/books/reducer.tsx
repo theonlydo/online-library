@@ -18,6 +18,11 @@ const Auth = (state: BookState = initialBookState, action: any) => {
         ...state,
         isLoading: action.value,
       };
+    case actionTypes.SET_SELECTED_BOOK:
+      return {
+        ...state,
+        selectedBook: action.value,
+      };
     default:
       return state;
   }

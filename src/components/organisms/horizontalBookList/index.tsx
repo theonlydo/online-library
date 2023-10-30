@@ -9,6 +9,7 @@ interface Props {
   dataList: Array<GroupList>;
   isLoading?: boolean;
   handleNavigateToDetail: any;
+  onPressBook: any;
 }
 
 const HorizontalBookList = (props: Props) => {
@@ -16,15 +17,14 @@ const HorizontalBookList = (props: Props) => {
     dataList = [],
     isLoading = true,
     handleNavigateToDetail = () => {},
+    onPressBook = () => {},
   } = props;
 
-  const _renderItem = ({item}: any) => {
+  const _renderItem = ({item, index}: any) => {
     return (
-      <BookCard
-        title={item.title}
-        author={item.author[0]?.name}
-        cover={item.cover}
-      />
+      <View key={index}>
+        <BookCard bookData={item} key={index} onPressBook={onPressBook} />
+      </View>
     );
   };
 

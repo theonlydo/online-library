@@ -4,11 +4,14 @@ import {BookCard} from '~components';
 import styles from './styles';
 import {appMetrics} from '~theme';
 import {useSelector} from 'react-redux';
-import {BookState, getBookListByGenre} from '~redux';
-import {SkeletonPlaceholder, useDispatch} from '~libraries';
+import {BookState, ItemBook, getBookListByGenre, setSelectedBook} from '~redux';
+import {SkeletonPlaceholder, useDispatch, useNavigation} from '~libraries';
+import NAVIGATIONS from '~constants/navigation';
 
 const BookListScreen = ({route}: any) => {
   const dispatch: any = useDispatch();
+  const navigation: any = useNavigation();
+
   const {genre} = route.params;
 
   const books: BookState = useSelector((state: any) => state.books);
@@ -36,16 +39,15 @@ const BookListScreen = ({route}: any) => {
     dispatch(getBookListByGenre(payload));
   };
 
+  const onPressBook = (item: ItemBook) => {
+    dispatch(setSelectedBook(item));
+    navigation.navigate(NAVIGATIONS.BORROW_BOOK, {
+      pageTitle: `Borrow: ${item.title}`,
+    });
+  };
+
   const _renderItem = ({item}: any) => {
-    return (
-      <BookCard
-        isHorizontal
-        title={item.title}
-        author={item.author[0]?.name}
-        cover={item.cover}
-        year={item.year}
-      />
-    );
+    return <BookCard isHorizontal bookData={item} onPressBook={onPressBook} />;
   };
 
   const _renderLoading = () => {

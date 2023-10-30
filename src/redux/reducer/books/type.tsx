@@ -11,13 +11,13 @@ export interface ItemBook {
 
 export interface GroupList {
   genre: string;
-  list: Array<BookState>;
+  list: Array<ItemBook>;
 }
 
 export interface BookState {
-  list: Array<BookState>;
+  list: Array<ItemBook>;
   groupList: Array<GroupList>;
-  selectedBook: BookState | null;
+  selectedBook: ItemBook | null;
   isLoading: boolean;
 }
 
