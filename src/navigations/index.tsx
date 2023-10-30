@@ -1,7 +1,12 @@
 import React from 'react';
 import NAVIGATIONS from '~constants/navigation';
 import {NavigationContainer, createNativeStackNavigator} from '~libraries';
-import {BookListScreen, DashboardScreen, BorrowBookScreen} from '~screens';
+import {
+  BookListScreen,
+  DashboardScreen,
+  BorrowBookScreen,
+  SuccesBooking,
+} from '~screens';
 
 const Stack = createNativeStackNavigator();
 
@@ -35,6 +40,11 @@ const RootNavigator = () => {
           name={NAVIGATIONS.BORROW_BOOK}
           component={BorrowBookScreen}
           options={({route}: any) => ({title: route?.params?.pageTitle})}
+        />
+        <Stack.Screen
+          name={NAVIGATIONS.SUCCESS_BOOKING}
+          component={SuccesBooking}
+          options={() => ({headerShown: false})}
         />
       </Stack.Navigator>
     </NavigationContainer>

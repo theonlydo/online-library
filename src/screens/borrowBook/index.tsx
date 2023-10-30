@@ -4,9 +4,12 @@ import {useSelector} from 'react-redux';
 import {BookState} from '~redux';
 import styles from './styles';
 import {Text} from '~components';
-import {DateTimePicker} from '~libraries';
+import {DateTimePicker, useNavigation} from '~libraries';
+import NAVIGATIONS from '~constants/navigation';
 
 const BorrowBookScreen = () => {
+  const navigation: any = useNavigation();
+
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
   const [date, setDate] = useState(new Date());
@@ -27,6 +30,10 @@ const BorrowBookScreen = () => {
     setShowDatePicker(true);
   };
 
+  const onSubmit = () => {
+    navigation.navigate(NAVIGATIONS.SUCCESS_BOOKING);
+  };
+
   const _renderBookSection = () => {
     return (
       <View style={styles.coverContainer}>
@@ -40,7 +47,7 @@ const BorrowBookScreen = () => {
       <>
         <Text style={styles.title}>{selectedBook?.title}</Text>
         <Text style={styles.author}>{selectedBook?.author[0].name}</Text>
-        <Text style={styles.year}>Tahun terbit {selectedBook?.year}</Text>
+        <Text style={styles.year}>Published at {selectedBook?.year}</Text>
       </>
     );
   };
@@ -66,13 +73,10 @@ const BorrowBookScreen = () => {
           onChangeText={setPhone}
           keyboardType="phone-pad"
         />
-
         <Text style={styles.textLabel}>Pickup Date</Text>
-
         <Pressable style={styles.dateContainer} onPress={showDatepicker}>
           <Text>{date.toDateString()}</Text>
         </Pressable>
-
         {showDatePicker && (
           <DateTimePicker
             value={date}
@@ -82,6 +86,8 @@ const BorrowBookScreen = () => {
           />
         )}
         <Pressable
+          disabled={!isValid}
+          onPress={onSubmit}
           style={[
             styles.btnContainer,
             isValid ? styles.activeBtn : styles.inActiveBtn,
