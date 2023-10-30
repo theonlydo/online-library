@@ -1,7 +1,7 @@
 const NAVIGATIONS = {
-  DASHBOARD: 'DASHBOARD',
-  BOOK_LIST: 'BOOK_LIST',
-  BOOKING_BOOK: 'BOOKING_BOOK',
+  DASHBOARD: 'Dashboard',
+  BOOK_LIST: 'BookList',
+  BOOKING_BOOK: 'BookingBook',
 };
 
 export default NAVIGATIONS;

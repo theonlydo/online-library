@@ -1,5 +1,5 @@
 import React from 'react';
-import {FlatList, View} from 'react-native';
+import {FlatList, Pressable, View} from 'react-native';
 import styles from './styles';
 import {appMetrics} from '~theme';
 import {GroupList} from '~redux';
@@ -8,10 +8,15 @@ import {BookCard, Text} from '~components';
 interface Props {
   dataList: Array<GroupList>;
   isLoading?: boolean;
+  handleNavigateToDetail: any;
 }
 
 const HorizontalBookList = (props: Props) => {
-  const {dataList = [], isLoading = true} = props;
+  const {
+    dataList = [],
+    isLoading = true,
+    handleNavigateToDetail = () => {},
+  } = props;
 
   const _renderItem = ({item}: any) => {
     return (
@@ -23,12 +28,17 @@ const HorizontalBookList = (props: Props) => {
     );
   };
 
-  const _renderGenre = (item: GroupList) => {
+  const _renderGenre = (item: GroupList, index: number) => {
     return (
-      <View style={styles.container}>
+      <View style={styles.container} key={index}>
         <View style={styles.topContainer}>
           <Text style={styles.genre}>{item.genre}</Text>
-          <Text>Selengkapnya</Text>
+          <Pressable
+            onPress={() => {
+              handleNavigateToDetail(item);
+            }}>
+            <Text>More books</Text>
+          </Pressable>
         </View>
         <FlatList
           horizontal
@@ -42,9 +52,9 @@ const HorizontalBookList = (props: Props) => {
   };
 
   if (isLoading) {
-    return ['', '', ''].map(e => {
+    return ['', '', ''].map((e: any, index: number) => {
       return (
-        <View style={{margin: appMetrics.gutter.m}}>
+        <View style={{margin: appMetrics.gutter.m}} key={index}>
           <SkeletonPlaceholder>
             <View>
               <SkeletonPlaceholder.Item
@@ -78,8 +88,8 @@ const HorizontalBookList = (props: Props) => {
     return null;
   }
 
-  return dataList.map((item: GroupList) => {
-    return _renderGenre(item);
+  return dataList.map((item: GroupList, index: number) => {
+    return _renderGenre(item, index);
   });
 };
 

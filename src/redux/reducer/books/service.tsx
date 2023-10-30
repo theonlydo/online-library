@@ -3,23 +3,25 @@ import {transformBookList} from './type';
 import {setBookGroupList, setBookList, setBookLoading} from './action';
 import GENRES from '~constants/genres';
 
-export const getBookListByGenre =
-  (payload: object) => async (dispatch: any) => {
-    try {
-      dispatch(setBookLoading(true));
-      const res: any = await API.reqGetBookByGenre(payload);
+export const getBookListByGenre = (payload: any) => async (dispatch: any) => {
+  try {
+    dispatch(setBookLoading(true));
+    const res: any = await API.reqGetBookByGenre(payload);
 
-      if (res?.works) {
-        const data: any = transformBookList(res?.works, 'love');
-        dispatch(setBookList(data));
-      }
+    if (res?.works) {
+      const data: any = transformBookList(res?.works, payload?.genre);
+      const newData = payload.lastData.concat(data);
+      dispatch(setBookList(newData));
       dispatch(setBookLoading(false));
-      return Promise.resolve(res);
-    } catch (err) {
-      dispatch(setBookLoading(false));
-      return Promise.resolve('login error');
+      return Promise.resolve(data);
     }
-  };
+    dispatch(setBookLoading(false));
+    return Promise.reject(res);
+  } catch (err) {
+    dispatch(setBookLoading(false));
+    return Promise.reject('login error');
+  }
+};
 
 export const getAllBooks = () => async (dispatch: any) => {
   try {

@@ -16,7 +16,7 @@ const RootNavigator = () => {
     <NavigationContainer>
       <Stack.Navigator
         screenOptions={() => ({
-          headerShown: false,
+          //headerShown: false,
           gestureEnabled: true,
           cardOverlayEnabled: true,
           animation: 'slide_from_right',
@@ -26,7 +26,11 @@ const RootNavigator = () => {
           name={NAVIGATIONS.DASHBOARD}
           component={DashboardScreen}
         />
-        <Stack.Screen name={NAVIGATIONS.BOOK_LIST} component={BookListScreen} />
+        <Stack.Screen
+          name={NAVIGATIONS.BOOK_LIST}
+          component={BookListScreen}
+          options={({route}: any) => ({title: route?.params?.pageTitle})}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );

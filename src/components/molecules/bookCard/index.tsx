@@ -7,10 +7,27 @@ interface Props {
   title: string;
   author: string;
   cover?: string;
+  year?: string;
+  isHorizontal?: boolean;
 }
 
 const BookCard = (props: Props) => {
-  const {title, author, cover} = props;
+  const {title, author, cover, isHorizontal, year} = props;
+
+  if (isHorizontal) {
+    return (
+      <View style={styles.containerVertical}>
+        <Image style={styles.book} source={{uri: cover}} />
+        <View style={styles.rightContainer}>
+          <Text style={styles.title}>{title}</Text>
+          <Text>
+            by <Text style={styles.name}>{author || '-'}</Text>
+          </Text>
+          <Text>year: {year}</Text>
+        </View>
+      </View>
+    );
+  }
 
   return (
     <View style={styles.container}>

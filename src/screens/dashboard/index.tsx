@@ -1,13 +1,15 @@
 import React, {useEffect, useState} from 'react';
 import {RefreshControl, ScrollView} from 'react-native';
-import {useDispatch} from '~libraries';
-import {BookState, getAllBooks} from '~redux';
+import {useDispatch, useNavigation} from '~libraries';
+import {BookState, GroupList, getAllBooks, setBookList} from '~redux';
 import styles from './styles';
 import {useSelector} from 'react-redux';
 import {HorizontalBookList} from '~components';
+import NAVIGATIONS from '~constants/navigation';
 
 const DashboardScreen = () => {
   const dispatch: any = useDispatch();
+  const navigation: any = useNavigation();
   const [refreshing] = useState(false);
   const books: BookState = useSelector((state: any) => state.books);
 
@@ -15,6 +17,15 @@ const DashboardScreen = () => {
     getData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  const navigateToList = (item: GroupList) => {
+    dispatch(setBookList(item.list));
+    navigation.navigate(NAVIGATIONS.BOOK_LIST, {
+      data: item.list,
+      genre: item.genre,
+      pageTitle: `Genre: ${item.genre}`,
+    });
+  };
 
   const getData = () => {
     dispatch(getAllBooks());
@@ -30,6 +41,7 @@ const DashboardScreen = () => {
       <HorizontalBookList
         dataList={books.groupList}
         isLoading={books.isLoading}
+        handleNavigateToDetail={navigateToList}
       />
     </ScrollView>
   );

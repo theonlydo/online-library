@@ -17,6 +17,11 @@ const styles = StyleSheet.create({
     elevation: 5,
     margin: 2,
   },
+  containerVertical: {
+    flex: 1,
+    flexDirection: 'row',
+    marginTop: appMetrics.gutter.m,
+  },
   book: {
     width: width,
     aspectRatio: 2 / 3,
@@ -24,6 +29,10 @@ const styles = StyleSheet.create({
     backgroundColor: colors.grey,
   },
   title: {
+    fontWeight: 'bold',
+    fontSize: 16,
+  },
+  titleHorizontal: {
     fontWeight: 'bold',
     fontSize: 16,
   },
@@ -35,6 +44,9 @@ const styles = StyleSheet.create({
   },
   genre: {
     color: colors.primary,
+  },
+  rightContainer: {
+    marginLeft: appMetrics.gutter.m,
   },
 });
 

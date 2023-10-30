@@ -1,6 +1,7 @@
 import {
-  NavigationContainer,
   CommonActions,
+  useNavigation,
+  NavigationContainer,
   createNavigationContainerRef,
 } from '@react-navigation/native';
 import CryptoJS from 'crypto-js';
@@ -24,6 +25,7 @@ export {
   persistStore,
   createReducer,
   useDispatch,
+  useNavigation,
   CommonActions,
   SkeletonContent,
   persistReducer,
